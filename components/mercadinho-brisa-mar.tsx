@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ShoppingCart, Droplets, Flame, Package, MapPin, Clock, Phone, ArrowRight, Instagram, Facebook, ExternalLink } from 'lucide-react';
+import { ShoppingCart, Droplets, Flame, Package, MapPin, Clock, Phone, ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 
@@ -9,6 +9,7 @@ const WHATSAPP_NUMBER = '86995353043';
 const WHATSAPP_LINK = `https://wa.me/55${WHATSAPP_NUMBER}?text=Olá! Gostaria de fazer um pedido.`;
 const STORE_LOCATION = { lat: -2.9013541, lng: -41.6201847 };
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
+const GOOGLE_MAPS_LINK = 'https://maps.app.goo.gl/TWzoxuSqDiUtStHi9';
 
 export default function MercadinhoBrisaMar() {
   return (
@@ -90,7 +91,7 @@ export default function MercadinhoBrisaMar() {
                 className="relative aspect-video overflow-hidden rounded-3xl shadow-2xl lg:aspect-square"
               >
                 <Image
-                  src="/public/assets/aistudio/image_8c39438c.png"
+                  src="/assets/brand/fachada-mercadinho-brisa-mar.png"
                   alt="Mercadinho Brisa Mar - Fachada Real"
                   fill
                   className="object-cover"
@@ -109,7 +110,7 @@ export default function MercadinhoBrisaMar() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
               <div className="relative h-[300px] overflow-hidden rounded-3xl shadow-lg lg:h-auto">
                 <Image
-                  src="/src/assets/images/hero_luis_correia_beach_road_1793835959263.jpg"
+                  src="/assets/images/hero_luis_correia_beach_road_1793835959263.jpg"
                   alt="Praias de Luís Correia"
                   fill
                   className="object-cover"
@@ -118,7 +119,7 @@ export default function MercadinhoBrisaMar() {
               </div>
               <div className="relative h-[300px] overflow-hidden rounded-3xl shadow-lg lg:h-auto">
                 <Image
-                  src="/public/assets/aistudio/image_87ae7aa9.png"
+                  src="/assets/aistudio/image_87ae7aa9.png"
                   alt="MBM Luís Correia"
                   fill
                   className="object-cover"
@@ -146,7 +147,7 @@ export default function MercadinhoBrisaMar() {
                 </p>
               </div>
               <a
-                href="https://maps.app.goo.gl/TWzoxuSqDiUtStHi9"
+                href={GOOGLE_MAPS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-red-600 font-bold hover:underline"
@@ -157,20 +158,30 @@ export default function MercadinhoBrisaMar() {
             </div>
 
             <div className="h-[450px] w-full rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 relative">
-              <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
-                <Map
-                  defaultZoom={15}
-                  defaultCenter={STORE_LOCATION}
-                  mapId="DEMO_MAP_ID"
-                  gestureHandling="greedy"
-                  disableDefaultUI={false}
-                  internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
-                >
-                  <AdvancedMarker position={STORE_LOCATION} title="Mercadinho Brisa Mar">
-                    <Pin background={'#dc2626'} borderColor={'#991b1b'} glyphColor={'#ffffff'} scale={1.2} />
-                  </AdvancedMarker>
-                </Map>
-              </APIProvider>
+              {GOOGLE_MAPS_API_KEY ? (
+                <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
+                  <Map
+                    defaultZoom={15}
+                    defaultCenter={STORE_LOCATION}
+                    mapId="DEMO_MAP_ID"
+                    gestureHandling="greedy"
+                    disableDefaultUI={false}
+                    internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
+                  >
+                    <AdvancedMarker position={STORE_LOCATION} title="Mercadinho Brisa Mar">
+                      <Pin background={'#dc2626'} borderColor={'#991b1b'} glyphColor={'#ffffff'} scale={1.2} />
+                    </AdvancedMarker>
+                  </Map>
+                </APIProvider>
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center gap-4 bg-[#17324d] p-8 text-center text-white">
+                  <MapPin className="h-10 w-10 text-[#ff6b5f]" />
+                  <p className="max-w-md text-lg font-semibold">Mercadinho Brisa Mar, Luís Correia - PI</p>
+                  <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#ff6b5f] px-5 py-3 text-sm font-bold text-white hover:bg-[#e9564d]">
+                    Abrir localização no Google Maps
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -189,7 +200,7 @@ export default function MercadinhoBrisaMar() {
                   title: 'Água Mineral (20L)',
                   desc: 'Entrega ágil de galões das principais marcas locais para sua hidratação.',
                   icon: Droplets,
-                  img: '/src/assets/images/service_mineral_water_20l_1793835960305.jpg',
+                  img: '/assets/images/service_mineral_water_20l_1793835960305.jpg',
                   color: 'text-blue-600',
                   bg: 'bg-blue-50'
                 },
@@ -197,7 +208,7 @@ export default function MercadinhoBrisaMar() {
                   title: 'Gás de Cozinha (P13)',
                   desc: 'Entrega rápida com instalação segura para sua casa ou pousada.',
                   icon: Flame,
-                  img: '/src/assets/images/service_gas_cylinder_p13_1793835960158.jpg',
+                  img: '/assets/images/service_gas_cylinder_p13_1793835960158.jpg',
                   color: 'text-orange-600',
                   bg: 'bg-orange-50'
                 },
@@ -205,7 +216,7 @@ export default function MercadinhoBrisaMar() {
                   title: 'Mercadorias em Geral',
                   desc: 'Alimentos, bebidas geladas, carvão, gelo e utilidades de praia.',
                   icon: ShoppingCart,
-                  img: '/src/assets/images/service_grocery_basket_1793835960942.jpg',
+                  img: '/assets/images/service_grocery_basket_1793835960942.jpg',
                   color: 'text-red-600',
                   bg: 'bg-red-50'
                 }
@@ -342,11 +353,8 @@ export default function MercadinhoBrisaMar() {
                     </div>
                   </a>
                   <div className="flex gap-4 mt-6">
-                    <a href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-blue-600 hover:text-white transition-colors">
-                      <Facebook className="h-5 w-5" />
-                    </a>
-                    <a href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-pink-600 hover:text-white transition-colors">
-                      <Instagram className="h-5 w-5" />
+                    <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer" aria-label="Abrir localização no Google Maps" className="h-10 w-10 flex items-center justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-red-600 hover:text-white transition-colors">
+                      <MapPin className="h-5 w-5" />
                     </a>
                   </div>
                 </div>
