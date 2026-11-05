@@ -1,0 +1,22 @@
+{
+  "name": "Mercadinho Brisa Mar",
+  "short_name": "Brisa Mar",
+  "description": "Entrega rápida de água, gás e mercadorias em Luís Correia, PI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "icons": [
+    {
+      "src": "/assets/aistudio/image_87ae7aa9.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/aistudio/image_87ae7aa9.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
