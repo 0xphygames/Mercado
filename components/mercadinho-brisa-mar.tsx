@@ -413,32 +413,19 @@ Pode me confirmar o valor total e o tempo de entrega?`;
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-[16/9] overflow-hidden rounded-[2.5rem] shadow-2xl bg-slate-900 group cursor-pointer"
+                className="relative aspect-[16/9] overflow-hidden rounded-[2.5rem] shadow-2xl bg-slate-900 group"
               >
-                <a 
-                  href={GOOGLE_MAPS_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full h-full"
+                <video
+                  className="h-full w-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/assets/brand/fachada-mercadinho-brisa-mar.png"
+                  aria-label="Tour em vídeo do Mercadinho Brisa Mar"
                 >
-                  <Image
-                    src="/assets/aistudio/image_acb4bff6.png"
-                    alt="Vídeo Tour Mercadinho Brisa Mar"
-                    fill
-                    className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                    <div className="h-24 w-24 rounded-full bg-red-600 flex items-center justify-center text-white shadow-2xl transition-transform group-hover:scale-110">
-                      <Play className="h-10 w-10 fill-current ml-1" />
-                    </div>
-                    <p className="mt-6 text-white font-black text-xl tracking-tight shadow-sm uppercase">Assistir Tour Completo</p>
-                  </div>
-                  <div className="absolute bottom-8 left-8 flex items-center gap-3">
-                    <div className="h-3 w-3 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-white font-bold text-sm uppercase tracking-widest">Google Local Guide Video</span>
-                  </div>
-                </a>
+                  <source src="/assets/brand/tour-mercadinho-brisa-mar.mp4" type="video/mp4" />
+                  Seu navegador não suporta reprodução de vídeo.
+                </video>
               </motion.div>
               
               <div>
