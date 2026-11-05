@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import { motion } from 'motion/react';
-import { Star, User, Calendar, Image as ImageIcon } from 'lucide-react';
+import { Star, User, Image as ImageIcon, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 
 interface GoogleReviewsProps {
@@ -64,8 +64,36 @@ export default function GoogleReviews({ placeName, location }: GoogleReviewsProp
     );
   }
 
+  const mapsLink = place?.id
+    ? `https://www.google.com/maps/place/?q=place_id:${place.id}`
+    : 'https://maps.app.goo.gl/TWzoxuSqDiUtStHi9';
+
   if (!place || (reviews.length === 0 && photos.length === 0)) {
-    return null; // Don't show anything if no data
+    return (
+      <section id="avaliacoes" className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center shadow-sm">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
+              <ImageIcon className="h-6 w-6" />
+            </div>
+            <h2 className="mt-4 text-2xl font-black text-slate-900">Veja nossa presença no Google Maps</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+              Confira as fotos públicas, avaliações e comentários dos clientes diretamente no perfil oficial do Mercadinho Brisa Mar.
+            </p>
+            <a
+              href={mapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
+            >
+              Ver avaliações e fotos no Google Maps
+              <ExternalLink className="h-4 w-4" />
+            </a>
+            <p className="mt-4 text-xs text-slate-400">Conteúdo e comentários exibidos pelo Google Maps.</p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
