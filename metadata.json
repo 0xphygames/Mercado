@@ -1,0 +1,6 @@
+{
+  "name": "Mercadinho Brisa Mar",
+  "description": "Entrega rápida de água, gás e mercadorias em Luís Correia, PI. Atendimento em domicílio, pousadas e casas de praia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
