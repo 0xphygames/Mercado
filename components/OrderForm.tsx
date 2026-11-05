@@ -17,11 +17,13 @@ type ProductState = {
 const initialProducts: Record<OrderProduct, ProductState> = {
   agua20l: { selected: false, quantity: 1, hasEmptyContainer: true },
   gasP13: { selected: false, quantity: 1, hasEmptyContainer: true },
+  mercadorias: { selected: false, quantity: 1, hasEmptyContainer: false },
 };
 
 const productLabels: Record<OrderProduct, string> = {
   agua20l: 'Água mineral 20L',
   gasP13: 'Gás de cozinha P13',
+  mercadorias: 'Mercadorias em geral',
 };
 
 const neighborhoods = [
@@ -42,6 +44,7 @@ export default function OrderForm() {
   const [reference, setReference] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
   const [changeFor, setChangeFor] = useState('');
+  const [merchandiseRequest, setMerchandiseRequest] = useState('');
   const [error, setError] = useState('');
 
   function updateProduct(product: OrderProduct, patch: Partial<ProductState>) {
@@ -71,6 +74,7 @@ export default function OrderForm() {
         reference,
         paymentMethod,
         changeFor: paymentMethod === 'dinheiro' && changeFor ? Number(changeFor) : undefined,
+        merchandiseRequest,
       });
 
       window.open(order.url, '_blank', 'noopener,noreferrer');
@@ -85,8 +89,8 @@ export default function OrderForm() {
     <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8" noValidate>
       <div className="mb-6">
         <p className="text-sm font-bold uppercase tracking-wider text-red-600">Pedido rápido</p>
-        <h2 className="mt-2 text-2xl font-bold text-slate-900">Peça Água ou Gás</h2>
-        <p className="mt-2 text-sm text-slate-600">Preencha os dados e confirme o pedido pelo WhatsApp.</p>
+        <h2 className="mt-2 text-2xl font-bold text-slate-900">Peça Água, Gás ou Mercadorias</h2>
+        <p className="mt-2 text-sm text-slate-600">Peça produtos prontos ou solicite um orçamento de mercadorias pelo WhatsApp.</p>
       </div>
 
       <fieldset className="space-y-4">
@@ -106,6 +110,19 @@ export default function OrderForm() {
               </label>
               {state.selected && (
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {product === 'mercadorias' ? (
+                    <label className="text-sm font-medium text-slate-700 sm:col-span-2">
+                      O que você deseja cotar?
+                      <textarea
+                        value={merchandiseRequest}
+                        onChange={(event) => setMerchandiseRequest(event.target.value)}
+                        placeholder="Ex.: 2 caixas de cerveja, gelo, carvão, frutas e itens para churrasco"
+                        rows={3}
+                        className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900"
+                      />
+                    </label>
+                  ) : (
+                    <>
                   <label className="text-sm font-medium text-slate-700">
                     Quantidade
                     <input
@@ -125,6 +142,8 @@ export default function OrderForm() {
                     />
                     Tenho vasilhame para troca
                   </label>
+                    </>
+                  )}
                 </div>
               )}
             </div>
