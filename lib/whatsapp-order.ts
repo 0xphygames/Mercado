@@ -1,4 +1,4 @@
-export type OrderProduct = 'agua20l' | 'gasP13';
+export type OrderProduct = 'agua20l' | 'gasP13' | 'mercadorias';
 
 export type PaymentMethod = 'pix' | 'cartao' | 'dinheiro';
 
@@ -11,6 +11,7 @@ export type OrderItem = {
 
 export type WhatsAppOrder = {
   items: OrderItem[];
+  merchandiseRequest?: string;
   neighborhood: string;
   address: string;
   reference?: string;
@@ -28,6 +29,7 @@ const WHATSAPP_NUMBER = '5586995353043';
 const PRODUCT_LABELS: Record<OrderProduct, string> = {
   agua20l: 'Galão de Água Mineral 20L',
   gasP13: 'Botijão de Gás P13',
+  mercadorias: 'Mercadorias em geral',
 };
 
 const PAYMENT_LABELS: Record<PaymentMethod, string> = {
@@ -73,6 +75,10 @@ function validateOrder(order: WhatsAppOrder): void {
     }
   });
 
+  if (order.items.some((item) => item.product === 'mercadorias') && !order.merchandiseRequest?.trim()) {
+    throw new WhatsAppOrderValidationError('Descreva os itens que deseja cotar em mercadorias gerais.');
+  }
+
   if (order.paymentMethod === 'dinheiro' && order.changeFor !== undefined) {
     if (!Number.isFinite(order.changeFor) || order.changeFor <= 0) {
       throw new WhatsAppOrderValidationError('Informe um valor de troco válido.');
@@ -84,6 +90,10 @@ export function buildWhatsAppOrder(order: WhatsAppOrder): WhatsAppOrderResult {
   validateOrder(order);
 
   const itemLines = order.items.map((item) => {
+    if (item.product === 'mercadorias') {
+      return `• Orçamento de mercadorias em geral\n  Lista: ${order.merchandiseRequest?.trim()}`;
+    }
+
     const price = item.unitPrice === undefined
       ? ''
       : ` (${formatCurrency(item.unitPrice * item.quantity)})`;
