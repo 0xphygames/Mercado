@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { ShoppingCart, Droplets, Flame, Package, MapPin, Clock, Phone, ArrowRight, Instagram, Facebook, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import GoogleReviews from './google-reviews';
 
 const WHATSAPP_NUMBER = '86995353043';
 const WHATSAPP_LINK = `https://wa.me/55${WHATSAPP_NUMBER}?text=Olá! Gostaria de fazer um pedido.`;
@@ -12,7 +13,8 @@ const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
 export default function MercadinhoBrisaMar() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-red-100 selection:text-red-900">
+    <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
+      <div className="min-h-screen bg-white text-slate-900 selection:bg-red-100 selection:text-red-900">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-8 px-6">
@@ -24,6 +26,9 @@ export default function MercadinhoBrisaMar() {
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             <a href="#servicos" className="hover:text-red-600 transition-colors whitespace-nowrap">Serviços</a>
+            <a href="#galeria" className="hover:text-red-600 transition-colors whitespace-nowrap">Galeria</a>
+            <a href="#avaliacoes" className="hover:text-red-600 transition-colors whitespace-nowrap">Avaliações</a>
+            <a href="#video-tour" className="hover:text-red-600 transition-colors whitespace-nowrap">Vídeo</a>
             <a href="#como-funciona" className="hover:text-red-600 transition-colors whitespace-nowrap">Como Funciona</a>
             <a href="#regioes" className="hover:text-red-600 transition-colors whitespace-nowrap">Regiões</a>
             <a href="#contato" className="hover:text-red-600 transition-colors whitespace-nowrap">Contato</a>
@@ -90,7 +95,7 @@ export default function MercadinhoBrisaMar() {
                 className="relative aspect-video overflow-hidden rounded-3xl shadow-2xl lg:aspect-square"
               >
                 <Image
-                  src="/public/assets/aistudio/image_8c39438c.png"
+                  src="/assets/aistudio/image_8c39438c.png"
                   alt="Mercadinho Brisa Mar - Fachada Real"
                   fill
                   className="object-cover"
@@ -103,34 +108,119 @@ export default function MercadinhoBrisaMar() {
           </div>
         </section>
 
-        {/* Coastal Imagery Section */}
-        <section className="py-12 bg-white">
+        {/* Store Gallery / Real Photos Section */}
+        <section id="galeria" className="py-24 bg-slate-50">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-              <div className="relative h-[300px] overflow-hidden rounded-3xl shadow-lg lg:h-auto">
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">Conheça o Brisa Mar</h2>
+              <p className="text-slate-600">Fotos reais do nosso estabelecimento e região.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="relative h-[300px] overflow-hidden rounded-3xl shadow-xl"
+              >
+                <Image
+                  src="/assets/aistudio/image_8c39438c.png"
+                  alt="Fachada Mercadinho Brisa Mar"
+                  fill
+                  className="object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-4 left-4 rounded-lg bg-white/90 px-3 py-1 text-xs font-bold text-red-600">Nossa Loja</div>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="relative h-[300px] overflow-hidden rounded-3xl shadow-xl"
+              >
+                <Image
+                  src="/assets/aistudio/image_87ae7aa9.png"
+                  alt="MBM - Identidade Visual"
+                  fill
+                  className="object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-4 left-4 rounded-lg bg-white/90 px-3 py-1 text-xs font-bold text-red-600">Marca MBM</div>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="relative h-[300px] overflow-hidden rounded-3xl shadow-xl"
+              >
                 <Image
                   src="/src/assets/images/hero_luis_correia_beach_road_1793835959263.jpg"
-                  alt="Praias de Luís Correia"
+                  alt="Luís Correia"
                   fill
                   className="object-cover"
                   referrerPolicy="no-referrer"
                 />
-              </div>
-              <div className="relative h-[300px] overflow-hidden rounded-3xl shadow-lg lg:h-auto">
-                <Image
-                  src="/public/assets/aistudio/image_87ae7aa9.png"
-                  alt="MBM Luís Correia"
-                  fill
-                  className="object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
+                <div className="absolute bottom-4 left-4 rounded-lg bg-white/90 px-3 py-1 text-xs font-bold text-red-600">Nossa Região</div>
+              </motion.div>
             </div>
-            <div className="mt-8 rounded-2xl bg-slate-50 p-8 border border-slate-100">
+            
+            <div className="mt-8 rounded-2xl bg-white p-8 border border-slate-100 shadow-sm">
               <h3 className="text-2xl font-bold text-slate-900 mb-2 italic">&quot;Entrega rápida e atendimento nota 10!&quot;</h3>
               <p className="text-slate-600">
                 Onde você estiver em Luís Correia, o Brisa Mar chega com o que você precisa. Do centro às praias mais distantes, seu pedido é nossa prioridade.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Tour Section */}
+        <section id="video-tour" className="py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative aspect-video overflow-hidden rounded-3xl shadow-2xl bg-slate-900 group cursor-pointer"
+              >
+                <a 
+                  href="https://www.google.com/maps/place/Mercadinho+Brisa+Mar/@-2.9013541,-41.6201847,3a,75y,90t/data=!3m8!1e5!3m6!1sCIHM0ogKEICAgIDZxqHvXw!2e10!3e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FANWiy9RzIPwG5l72fWpdTZCp-me2XMu_XlZrHP1t940Vc_jwPgUYdhS5gZtLQGFtZl3Mq3zJGR9lMLye7IzyEHRJqVh9m2vX1HVMFgsJo97EPQHhMXvMTcscDM3Jdy9bd8UH2OsMTBDJ%3Dw518-h298-k-no!7i640!8i368!4m17!1m7!3m6!1s0x7ec231532d3ae0f:0x9d402c89ae221302!2sMercadinho+Brisa+Mar!8m2!3d-2.9013541!4d-41.6201847!16s%2Fg%2F11qb3vq5n1!3m8!1s0x7ec231532d3ae0f:0x9d402c89ae221302!8m2!3d-2.9013541!4d-41.6201847!10e5!14m1!1BCgIgARICCAQ!16s%2Fg%2F11qb3vq5n1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/assets/aistudio/image_8c39438c.png"
+                    alt="Vídeo Tour Mercadinho Brisa Mar"
+                    fill
+                    className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-20 w-20 rounded-full bg-red-600 flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-125">
+                      <Phone className="h-8 w-8 fill-current rotate-90" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <p className="text-sm font-bold uppercase tracking-wider mb-1">Vídeo em Destaque</p>
+                    <h4 className="text-xl font-bold">Assista ao nosso Tour no Google</h4>
+                  </div>
+                </a>
+              </motion.div>
+              
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-6">Transparência e Qualidade</h2>
+                <p className="text-lg text-slate-600 mb-8">
+                  Assista ao vídeo da nossa unidade e veja de perto como cuidamos do seu pedido. No Mercadinho Brisa Mar, a qualidade do atendimento começa antes mesmo da entrega.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    'Ambiente limpo e organizado',
+                    'Atendimento personalizado',
+                    'Produtos selecionados',
+                    'Logística de entrega eficiente'
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3 text-slate-700">
+                      <div className="h-2 w-2 rounded-full bg-red-600" />
+                      <span className="font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -157,20 +247,18 @@ export default function MercadinhoBrisaMar() {
             </div>
 
             <div className="h-[450px] w-full rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 relative">
-              <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
-                <Map
-                  defaultZoom={15}
-                  defaultCenter={STORE_LOCATION}
-                  mapId="DEMO_MAP_ID"
-                  gestureHandling="greedy"
-                  disableDefaultUI={false}
-                  internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
-                >
-                  <AdvancedMarker position={STORE_LOCATION} title="Mercadinho Brisa Mar">
-                    <Pin background={'#dc2626'} borderColor={'#991b1b'} glyphColor={'#ffffff'} scale={1.2} />
-                  </AdvancedMarker>
-                </Map>
-              </APIProvider>
+              <Map
+                defaultZoom={15}
+                defaultCenter={STORE_LOCATION}
+                mapId="DEMO_MAP_ID"
+                gestureHandling="greedy"
+                disableDefaultUI={false}
+                internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
+              >
+                <AdvancedMarker position={STORE_LOCATION} title="Mercadinho Brisa Mar">
+                  <Pin background={'#dc2626'} borderColor={'#991b1b'} glyphColor={'#ffffff'} scale={1.2} />
+                </AdvancedMarker>
+              </Map>
             </div>
           </div>
         </section>
@@ -241,6 +329,9 @@ export default function MercadinhoBrisaMar() {
             </div>
           </div>
         </section>
+
+        {/* Automatic Google Reviews Section */}
+        <GoogleReviews placeName="Mercadinho Brisa Mar" location={STORE_LOCATION} />
 
         {/* How It Works */}
         <section id="como-funciona" className="py-24 bg-slate-900 text-white overflow-hidden relative">
@@ -363,6 +454,7 @@ export default function MercadinhoBrisaMar() {
           <p className="mt-2 text-slate-600">Luís Correia - Piauí</p>
         </div>
       </footer>
-    </div>
+      </div>
+    </APIProvider>
   );
 }
