@@ -146,27 +146,52 @@ export default function GoogleReviews({ placeName, location }: GoogleReviewsProp
 
         {/* Photos / Local Guide Mosaico */}
         {photos.length > 0 && (
-          <div className="mt-16">
-            <div className="mb-8 flex items-center gap-2">
-              <ImageIcon className="h-5 w-5 text-red-600" />
-              <h3 className="text-xl font-bold text-slate-900">Fotos de Visitantes e Local Guides</h3>
+          <div className="mt-24 border-t border-slate-100 pt-16">
+            <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <ImageIcon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">Galeria Local Guide</h3>
+                  <p className="text-sm text-slate-500 text-wrap-balance">Fotos reais enviadas pela comunidade no Google Maps</p>
+                </div>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-700 border border-orange-100">
+                <Star className="h-3 w-3 fill-current" />
+                Google Local Guide Contributions
+              </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {photos.slice(0, 12).map((photo, i) => (
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {photos.slice(0, 18).map((photo, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ scale: 1.05 }}
-                  className="relative aspect-square overflow-hidden rounded-xl bg-slate-200 shadow-md group"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (i % 6) * 0.05 }}
+                  whileHover={{ scale: 1.05, zIndex: 10 }}
+                  className={`relative aspect-square overflow-hidden rounded-2xl bg-slate-100 shadow-sm group cursor-zoom-in ${
+                    i === 0 || i === 7 ? 'md:col-span-2 md:row-span-2' : ''
+                  }`}
                 >
                   <Image
-                    src={photo.getURI({ maxWidth: 400, maxHeight: 400 })}
-                    alt="Place Photo"
+                    src={photo.getURI({ maxWidth: 800, maxHeight: 800 })}
+                    alt={`Foto do Mercadinho Brisa Mar - Contribuição ${i + 1}`}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:rotate-2"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
+                  <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
                 </motion.div>
               ))}
+            </div>
+            
+            <div className="mt-12 text-center">
+              <p className="text-sm text-slate-400 italic">
+                Todas as imagens acima são de domínio público e extraídas via Google Maps Platform.
+              </p>
             </div>
           </div>
         )}
