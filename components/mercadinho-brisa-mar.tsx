@@ -178,29 +178,25 @@ export default function MercadinhoBrisaMar() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-video overflow-hidden rounded-3xl shadow-2xl bg-slate-900 group cursor-pointer"
+                className="relative aspect-video overflow-hidden rounded-3xl shadow-2xl bg-slate-900 group"
               >
-                <a 
-                  href="https://www.google.com/maps/place/Mercadinho+Brisa+Mar/@-2.9013541,-41.6201847,3a,75y,90t/data=!3m8!1e5!3m6!1sCIHM0ogKEICAgIDZxqHvXw!2e10!3e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FANWiy9RzIPwG5l72fWpdTZCp-me2XMu_XlZrHP1t940Vc_jwPgUYdhS5gZtLQGFtZl3Mq3zJGR9lMLye7IzyEHRJqVh9m2vX1HVMFgsJo97EPQHhMXvMTcscDM3Jdy9bd8UH2OsMTBDJ%3Dw518-h298-k-no!7i640!8i368!4m17!1m7!3m6!1s0x7ec231532d3ae0f:0x9d402c89ae221302!2sMercadinho+Brisa+Mar!8m2!3d-2.9013541!4d-41.6201847!16s%2Fg%2F11qb3vq5n1!3m8!1s0x7ec231532d3ae0f:0x9d402c89ae221302!8m2!3d-2.9013541!4d-41.6201847!10e5!14m1!1BCgIgARICCAQ!16s%2Fg%2F11qb3vq5n1"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <video
+                  className="h-full w-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/assets/brand/fachada-mercadinho-brisa-mar.png"
+                  aria-label="Tour em vídeo do Mercadinho Brisa Mar"
                 >
-                  <Image
-                    src="/assets/aistudio/image_8c39438c.png"
-                    alt="Vídeo Tour Mercadinho Brisa Mar"
-                    fill
-                    className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-20 w-20 rounded-full bg-red-600 flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-125">
-                      <Phone className="h-8 w-8 fill-current rotate-90" />
-                    </div>
-                  </div>
+                  <source src="/assets/brand/tour-mercadinho-brisa-mar.mp4" type="video/mp4" />
+                  Seu navegador não suporta reprodução de vídeo.
+                </video>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-5 pt-12 text-white">
                   <div className="absolute bottom-6 left-6 text-white">
                     <p className="text-sm font-bold uppercase tracking-wider mb-1">Vídeo em Destaque</p>
-                    <h4 className="text-xl font-bold">Assista ao nosso Tour no Google</h4>
+                    <h4 className="text-xl font-bold">Tour pelo Mercadinho Brisa Mar</h4>
                   </div>
-                </a>
+                </div>
               </motion.div>
               
               <div>
