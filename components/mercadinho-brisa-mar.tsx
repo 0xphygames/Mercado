@@ -331,7 +331,7 @@ export default function MercadinhoBrisaMar() {
                   controls
                   playsInline
                   preload="metadata"
-                  poster="/assets/aistudio/image_8c39438c.png"
+                  poster="/assets/brand/fachada-mercadinho-brisa-mar.png"
                   aria-label="Tour em vídeo do Mercadinho Brisa Mar"
                 >
                   <source src="/assets/brand/tour-mercadinho-brisa-mar.mp4" type="video/mp4" />

@@ -73,3 +73,44 @@ Auditar o projeto nas dimensões de segurança, funcionamento e UX/interface, us
 3. Usar a localização e o Street View como CTA/galeria externa, sem depender de URL temporária de imagem do Google.
 4. Não incorporar ou baixar vídeo protegido/dinâmico sem arquivo original ou autorização explícita; se o usuário fornecer o arquivo, otimizar e hospedar no projeto.
 5. Atualizar a galeria com fotos locais estáveis e textos alternativos descritivos.
+
+## Plano de implementação: funcionalidades do Google Local Guide
+
+### Objetivo
+
+Exibir no site as contribuições públicas relevantes do Google Maps — avaliações, nota, quantidade de avaliações, fotos e tour — com carregamento seguro, fallback e atribuição correta, sem tratar conteúdo externo como domínio público.
+
+### Diagnóstico atual
+
+1. O projeto já possui `components/google-reviews.tsx` com busca de avaliações e fotos via Places API (New).
+2. O site já possui vídeo local, link para Google Maps e mapa com as coordenadas do estabelecimento.
+3. A implementação atual precisa ser revisada para: estados de erro/vazio, atribuição/termos de uso, origem das imagens, carregamento da biblioteca e estabilidade em redes móveis.
+
+### Entregas propostas
+
+1. Revisar o componente Google Local Guide e manter apenas campos suportados pela API configurada.
+2. Adicionar estados de carregamento, erro e fallback para o link oficial do Google Maps.
+3. Melhorar a galeria com atribuição visível, texto alternativo, lazy loading e abertura do conteúdo original no Google Maps.
+4. Melhorar avaliações com nota, quantidade, data/autor e link oficial, sem copiar conteúdo além do necessário.
+5. Manter o tour em vídeo local como conteúdo separado, com CTA para o perfil público no Google Maps.
+6. Validar a configuração da chave pública, restrições por domínio e ausência de chave hardcoded.
+7. Executar lint/build e revisar o fluxo em desktop e celular.
+
+### Critérios de aceite
+
+- O site mostra avaliações e fotos quando a Places API responde.
+- O site continua navegável quando a API falha, a chave está ausente ou não há conteúdo.
+- Cada bloco de conteúdo do Google possui atribuição e link oficial.
+- Fotos e avaliações não são apresentadas como conteúdo próprio do Mercadinho.
+- A galeria não bloqueia o CTA de pedido via WhatsApp nem o mapa/GPS.
+- Lint e build passam sem novos erros.
+
+### Fora do escopo
+
+- Scraping de páginas do Google Maps.
+- Download automático de vídeos ou fotos por URLs temporárias.
+- Persistência em banco, login, moderação própria ou publicação de avaliações.
+
+### Aprovação necessária
+
+Antes de editar o código, confirmar este plano e informar se há uma chave/configuração oficial do Google Maps Platform já autorizada para o domínio de produção.
